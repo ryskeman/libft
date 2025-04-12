@@ -6,7 +6,7 @@
 #    By: fernafer <fernafer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/10 18:28:59 by fernafer          #+#    #+#              #
-#    Updated: 2025/04/11 20:05:17 by fernafer         ###   ########.fr        #
+#    Updated: 2025/04/12 18:21:22 by fernando         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ AR = ar rcs
 
 # SOURCES FILES LIST
 SOURCES = ft_isalpha.c ft_isalnum.c ft_isdigit.c ft_isascii.c ft_isprint.c ft_strlen.c \
-		  ft_memset.c ft_strlcpy.c ft_bzero.c 
+		  ft_memset.c ft_strlcpy.c ft_bzero.c ft_memmove.c 
 
 # HEADER FILES
 HEADERS = libft.h
