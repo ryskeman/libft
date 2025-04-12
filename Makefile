@@ -6,7 +6,7 @@
 #    By: fernafer <fernafer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/10 18:28:59 by fernafer          #+#    #+#              #
-#    Updated: 2025/04/12 18:21:22 by fernando         ###   ########.fr        #
+#    Updated: 2025/04/12 19:10:41 by fernando         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,9 @@ CFLAGS = -Wall -Wextra -Werror -c
 AR = ar rcs
 
 # SOURCES FILES LIST
-SOURCES = ft_isalpha.c ft_isalnum.c ft_isdigit.c ft_isascii.c ft_isprint.c ft_strlen.c \
-		  ft_memset.c ft_strlcpy.c ft_bzero.c ft_memmove.c 
+SOURCES = ft_isalpha.c ft_isalnum.c ft_isdigit.c ft_isascii.c ft_isprint.c \
+	  ft_strlen.c ft_memset.c ft_strlcpy.c ft_bzero.c ft_memmove.c \
+	  ft_toupper.c ft_tolower.c 
 
 # HEADER FILES
 HEADERS = libft.h
