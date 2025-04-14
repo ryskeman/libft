@@ -6,7 +6,7 @@
 /*   By: fernafer <fernafer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 18:54:37 by fernafer          #+#    #+#             */
-/*   Updated: 2025/04/10 19:59:41 by fernafer         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:06:53 by fernafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	*ft_memset(void *s, int c, size_t n)
 	return (s);
 }
 /*
-#include <stdio.h>
 int	main(void)
 {
 	// *** Definición del caso de prueba ***
