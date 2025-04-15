@@ -6,7 +6,7 @@
 /*   By: fernafer <fernafer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 17:16:21 by fernafer          #+#    #+#             */
-/*   Updated: 2025/04/14 11:05:59 by fernafer         ###   ########.fr       */
+/*   Updated: 2025/04/15 09:46:01 by fernafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,17 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 	d = (unsigned char *)dst;
 	s = (const unsigned char *)src;
-	i = 0;
+	if (dst == src || len == 0)
+		return (dst);
 	if (d > s)
 	{
-		while (len > 0)
-		{
-			d[len - 1] = s[len - 1];
-			len--;
-		}
+		while (len--)
+			d[len] = s[len];
 	}
 	else
 	{
-		while (i < len)
+		i = 0;
+		while (len--)
 		{
 			d[i] = s[i];
 			i++;
