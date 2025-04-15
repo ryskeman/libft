@@ -6,7 +6,7 @@
 /*   By: fernafer <fernafer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:30:45 by fernafer          #+#    #+#             */
-/*   Updated: 2025/04/15 12:54:41 by fernafer         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:40:38 by fernafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(void)
 	printf("Carácter buscado: '%c'\n", caracter_a_buscar);
 
 	printf("ft_strrchr: %p\n", resultado_ft);
-	printf("strrchr:    %p\n", resultado_original);
+	printf("strrchr:    %p\n", resultado_original);clear
 
 	if (resultado_ft == resultado_original) {
 		printf("Resultados iguales\n");
