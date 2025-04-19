@@ -6,7 +6,7 @@
 /*   By: fernafer <fernafer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:34:10 by fernafer          #+#    #+#             */
-/*   Updated: 2025/04/19 08:54:12 by fernafer         ###   ########.fr       */
+/*   Updated: 2025/04/19 14:58:29 by fernafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*ft_strdup(const char *s)
 	char	*s_copy;
 	size_t	s_size;
 
-	if (s == NULL)
-		return (NULL);
 	s_size = ft_strlen(s);
 	s_copy = malloc(s_size + 1);
 	if (s_copy == NULL)

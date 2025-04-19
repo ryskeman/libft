@@ -6,7 +6,7 @@
 /*   By: fernafer <fernafer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:21:44 by fernafer          #+#    #+#             */
-/*   Updated: 2025/04/19 12:35:02 by fernafer         ###   ########.fr       */
+/*   Updated: 2025/04/19 14:59:15 by fernafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,17 @@ char	**ft_fill_up_matrix(const char *s, char **matrix, char c)
 	return (matrix);
 }
 
+static char	**ft_handle_special_cases(void)
+{
+	char	**matrix;
+
+	matrix = malloc(sizeof(char *));
+	if (!matrix)
+		return (NULL);
+	matrix[0] = NULL;
+	return (matrix);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	int		num_substrings;
@@ -90,7 +101,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	num_substrings = ft_know_words(s, c);
 	if (num_substrings == 0)
-		return (NULL);
+		return (ft_handle_special_cases());
 	matrix = malloc((num_substrings + 1) * sizeof(char *));
 	if (!matrix)
 		return (NULL);
@@ -106,7 +117,10 @@ int	main(void)
 
 	s = "   Hello w0rld, chicos!!";
 	v = ft_split(s, ' ');
-	while (*v)
-		printf("%s\n", *v++);
+	if (v)
+	{
+		ft_free_memory(v);
+	}
+	return (0);
 }
 */
