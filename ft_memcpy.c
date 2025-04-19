@@ -6,7 +6,7 @@
 /*   By: fernafer <fernafer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 20:18:28 by fernafer          #+#    #+#             */
-/*   Updated: 2025/04/11 21:12:15 by fernafer         ###   ########.fr       */
+/*   Updated: 2025/04/19 11:58:43 by fernafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	const unsigned char	*s;
 	size_t				i;
 
-	d = (unsigned char *)dest;
-	s = (const unsigned char *)src;
+	if (n == 0)
+		return (NULL);
 	if (dest == NULL && src == NULL)
 		return (dest);
+	d = (unsigned char *)dest;
+	s = (const unsigned char *)src;
 	i = 0;
 	while (i < n)
 	{

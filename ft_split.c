@@ -6,107 +6,97 @@
 /*   By: fernafer <fernafer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:21:44 by fernafer          #+#    #+#             */
-/*   Updated: 2025/04/16 16:40:07 by fernafer         ###   ########.fr       */
+/*   Updated: 2025/04/19 12:35:02 by fernafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned int	safe_malloc(char **token_v, size_t position, size_t buffer)
+static int	ft_know_words(char const *s, char c)
 {
-	size_t	i;
+	int	i;
+	int	count;
+	int	in_word;
 
 	i = 0;
-	token_v[position] = malloc(buffer);
-	if (NULL == token_v[position])
+	count = 0;
+	in_word = 0;
+	while (s[i])
 	{
-		while (i < position)
+		if (s[i] != c)
 		{
-			free(token_v[i++]);
-		}
-		free(token_v);
-		return (1);
-	}
-	return (0);
-}
-
-int	complete(char **token_v, char const *s, char delimeter)
-{
-	size_t	len;
-	size_t	i;
-
-	i = 0;
-	while (*s)
-	{
-		len = 0;
-		while (*s == delimeter && *s)
-			++s;
-		while (*s != delimeter && *s)
-		{
-			++len;
-			++s;
-		}
-		if (len)
-		{
-			if (safe_malloc(token_v, i, len + 1))
-				return (1);
-			ft_strlcpy(token_v[i], s - len, len + 1);
-			++i;
-		}
-	}
-	return (0);
-}
-
-size_t	count_tokens(char const *s, char delimiter)
-{
-	size_t	tokens;
-	int		inside_token;
-
-	tokens = 0;
-	while (*s)
-	{
-		inside_token = 0;
-		while (*s == delimiter && *s)
-			++s;
-		while (*s != delimiter && *s)
-		{
-			if (!inside_token)
+			if (!in_word)
 			{
-				++tokens;
-				inside_token = 1;
+				count++;
+				in_word = 1;
 			}
-			++s;
 		}
+		else
+			in_word = 0;
+		i++;
 	}
-	return (tokens);
+	return (count);
 }
 
-char	**ft_split(char const *s, char charset)
+static void	*ft_free_memory(char **matrix)
 {
-	size_t	tokens;
-	size_t	i;
-	char	**token_v;
+	int	i;
 
 	i = 0;
-	if (NULL == s)
-		return (NULL);
-	tokens = 0;
-	tokens = count_tokens(s, charset);
-	token_v = malloc((tokens + 1) * sizeof(char *));
-	if (NULL == token_v)
-		return (NULL);
-	token_v[tokens] = NULL;
-	if (complete(token_v, s, charset))
+	while (matrix[i])
 	{
-		while (i < tokens)
-		{
-			free(token_v[i]);
-			i++;
-		}
-		free(token_v);
-		return (NULL);
+		free(matrix[i]);
+		i++;
 	}
-	return (token_v);
+	free(matrix);
+	return (NULL);
+}
+
+char	**ft_fill_up_matrix(const char *s, char **matrix, char c)
+{
+	int	i;
+	int	start;
+	int	index;
+
+	i = 0;
+	start = -1;
+	index = 0;
+	while (s[i])
+	{
+		if (s[i] != c && start == -1)
+			start = i;
+		else if ((s[i] == c || s[i + 1] == '\0') && start != -1)
+		{
+			if (s[i] == c)
+				matrix[index++] = ft_substr(s, start, i - start);
+			else
+				matrix[index++] = ft_substr(s, start, i - start + 1);
+			if (!matrix[index - 1])
+				return (NULL);
+			start = -1;
+		}
+		i++;
+	}
+	matrix[index] = NULL;
+	return (matrix);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	int		num_substrings;
+	char	**matrix;
+
+	if (!s)
+		return (NULL);
+	num_substrings = ft_know_words(s, c);
+	if (num_substrings == 0)
+		return (NULL);
+	matrix = malloc((num_substrings + 1) * sizeof(char *));
+	if (!matrix)
+		return (NULL);
+	if (!ft_fill_up_matrix(s, matrix, c))
+		return (ft_free_memory(matrix));
+	return (matrix);
 }
 /*
 int	main(void)
@@ -115,7 +105,7 @@ int	main(void)
 	char	**v;
 
 	s = "   Hello w0rld, chicos!!";
-	v = ft_split(s, " ");
+	v = ft_split(s, ' ');
 	while (*v)
 		printf("%s\n", *v++);
 }
