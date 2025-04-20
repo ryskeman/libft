@@ -6,7 +6,7 @@
 #    By: fernafer <fernafer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/10 18:28:59 by fernafer          #+#    #+#              #
-#    Updated: 2025/04/20 01:00:25 by fernando         ###   ########.fr        #
+#    Updated: 2025/04/20 19:41:07 by fernando         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,9 @@ SOURCES = ft_isalpha.c ft_isalnum.c ft_isdigit.c ft_isascii.c ft_isprint.c \
 	  ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
 	  ft_putendl_fd.c ft_putnbr_fd.c
 
+# OBJECTS LIST CREATOR
+OBJS = $(SOURCES:.c=.o)
+
 # BONUS SOURCES
 BONUS_SRC = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 	    ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
@@ -42,20 +45,6 @@ BONUS_SRC = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 # BONUS OBJS
 BONUS_OBJ = $(BONUS_SRC:.c=.o)
 
-# OBJECTS LIST CREATOR
-OBJS = $(SOURCES:.c=.o) $(BONUS_OBJ)
-
-#BONUS RULE:
-bonus: $(NAME)
-
-# MAIN RULE: LIBFT.A CREATOR.
-all: $(NAME)
-
-# CREATOR OBJS RULE
-%.o: %.c $(HEADERS)
-	@echo "⚙️ Compiling $< in $@"
-		 $(CC) $(CFLAGS) $< -o $@
-
 # RULE TO CREATE THE LIBRARY
 $(NAME): $(OBJS)
 	@echo "📚 Making the static library $(NAME) from the objects..."
@@ -63,6 +52,26 @@ $(NAME): $(OBJS)
 	@echo "-----------------------------------------"
 	@echo "✅ Compilation $(NAME) completed."
 	@echo "-----------------------------------------"
+
+# TARGET FOR BONUS OBJECTS
+bonus_objs: $(BONUS_OBJ)
+	@echo "🛠️ Compiling bonus objects..."
+
+# RULE TO UPDATE THE LIBRARY WITH BONUS OBJECTS
+bonus: $(NAME) bonus_objs
+	@echo "➕ Adding bonus objects to $(NAME)..."
+	@$(AR) $(NAME) $(BONUS_OBJ)
+	@echo "-----------------------------------------"
+	@echo "✅ Bonus features added to $(NAME)."
+	@echo "-----------------------------------------"
+
+# MAIN RULE: LIBFT.A CREATOR.
+all: $(NAME)
+
+# CREATOR OBJS RULE
+%.o: %.c $(HEADERS)
+	@echo "⚙️ Compiling $< in $@"
+	$(CC) $(CFLAGS) $< -o $@
 
 # CLEAN RULE: DELETE OBJECT FILES
 clean:
@@ -81,4 +90,4 @@ re: fclean all
 	@echo "🔄 Recompiling project..."
 
 # PHONY TARGETS
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus bonus_objs

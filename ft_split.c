@@ -6,7 +6,7 @@
 /*   By: fernafer <fernafer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:21:44 by fernafer          #+#    #+#             */
-/*   Updated: 2025/04/19 14:59:15 by fernafer         ###   ########.fr       */
+/*   Updated: 2025/04/20 18:56:09 by fernando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,32 +52,30 @@ static void	*ft_free_memory(char **matrix)
 	return (NULL);
 }
 
-char	**ft_fill_up_matrix(const char *s, char **matrix, char c)
+static char	**ft_fill_up_matrix(const char *s, char **matrix, char c)
 {
 	int	i;
 	int	start;
-	int	index;
+	int	idx;
 
 	i = 0;
 	start = -1;
-	index = 0;
+	idx = 0;
 	while (s[i])
 	{
 		if (s[i] != c && start == -1)
 			start = i;
-		else if ((s[i] == c || s[i + 1] == '\0') && start != -1)
+		if (start != -1 && (s[i + 1] == '\0' || s[i] == c))
 		{
-			if (s[i] == c)
-				matrix[index++] = ft_substr(s, start, i - start);
-			else
-				matrix[index++] = ft_substr(s, start, i - start + 1);
-			if (!matrix[index - 1])
+			matrix[idx] = ft_substr(s, start, i - start + (s[i] != c));
+			if (!matrix[idx])
 				return (NULL);
+			idx++;
 			start = -1;
 		}
 		i++;
 	}
-	matrix[index] = NULL;
+	matrix[idx] = NULL;
 	return (matrix);
 }
 
